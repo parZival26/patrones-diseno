@@ -9,3 +9,40 @@
  * 
  * https://refactoring.guru/es/design-patterns/prototype
  */
+class DocumentPrototype {
+  constructor(
+    public title: string,
+    private content: string,
+    public author: string
+  ) {}
+
+  clone(): DocumentPrototype {
+    return new DocumentPrototype(this.title, this.content, this.author);
+  }
+
+  displayInfo() {
+    console.log(`
+        Title: ${this.title}
+        Content: ${this.content}
+        Author: ${this.author}
+        `);
+  }
+}
+
+function main() {
+  const document1 = new DocumentPrototype(
+    "Cotizacion",
+    "500 dolares",
+    "Fernando"
+  );
+
+  console.log({ document1 });
+  document1.displayInfo();
+
+  const document2 = document1.clone();
+  document2.title = "Nueva cotizacion";
+  console.log({ document2 });
+  document2.displayInfo();
+}
+
+main();

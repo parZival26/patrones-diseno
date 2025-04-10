@@ -7,7 +7,7 @@
  * * la cantidad de memoria que utilizan.
  */
 
-import { COLORS } from '../helpers/colors.ts';
+import { COLORS } from "../helpers/colors.ts";
 
 // 1. Clase que representa el tipo de bala - BulletType (Flyweight)
 class BulletType {
@@ -42,11 +42,14 @@ class BulletTypeFactory {
     // TODO: Implementar un método para obtener un tipo de bala
     // Si no existe el tipo de bala, crearlo y guardarlo en la lista de tipos de bala
     // Si existe el tipo de bala, devolverlo
-
+    const bulletKey = `${name}-${damage}-${color}`;
+    if (!this.bulletTypes[bulletKey]) {
+      console.log(`%cCreando nueva instnacia ${bulletKey}`, COLORS.red);
+      this.bulletTypes[bulletKey] = new BulletType(name, damage, color);
+    }
     // TODO: El key, debería de ser un identificador único para cada tipo de bala
     // name-damage-color
-
-    throw new Error('Method not implemented.');
+    return this.bulletTypes[bulletKey];
   }
 }
 
@@ -113,11 +116,11 @@ function main() {
   const shootingSystem = new ShootingSystem(factory);
 
   // Disparar varias balas de diferentes tipos
-  shootingSystem.shoot(10, 20, 0, 'Pistola', 10, 'Gris');
-  shootingSystem.shoot(15, 25, 90, 'Escopeta', 20, 'Rojo');
-  shootingSystem.shoot(20, 30, 180, 'Rifle', 15, 'Verde');
-  shootingSystem.shoot(10, 20, 45, 'Pistola', 10, 'Gris');
-  shootingSystem.shoot(25, 35, 270, 'Escopeta', 20, 'Rojo');
+  shootingSystem.shoot(10, 20, 0, "Pistola", 10, "Gris");
+  shootingSystem.shoot(15, 25, 90, "Escopeta", 20, "Rojo");
+  shootingSystem.shoot(20, 30, 180, "Rifle", 15, "Verde");
+  shootingSystem.shoot(10, 20, 45, "Pistola", 10, "Gris");
+  shootingSystem.shoot(25, 35, 270, "Escopeta", 20, "Rojo");
 
   console.log(
     `Total de balas disparadas: %c${shootingSystem.getBulletCount()}\n`,

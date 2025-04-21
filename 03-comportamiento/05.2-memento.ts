@@ -9,7 +9,7 @@
  * https://refactoring.guru/es/design-patterns/memento
  */
 
-import { COLORS } from '../helpers/colors.ts';
+import { COLORS } from "../helpers/colors.ts";
 
 // Una pizarra donde se pueden agregar figuras
 
@@ -39,19 +39,19 @@ class DrawingBoard {
 
   // Mostrar el estado actual de la pizarra
   showBoard(): void {
-    console.log('Pizarra actual:', this.shapes.join(', ') || 'Vacía');
+    console.log("Pizarra actual:", this.shapes.join(", ") || "Vacía");
   }
 
   // Crear un Memento del estado actual de la pizarra
   save(): DrawingMemento {
     // TODO: Implementar el método save para guardar el estado actual
-    throw new Error('Method not implemented.');
+    return new DrawingMemento([...this.shapes]);
   }
 
   // Restaurar el estado de la pizarra desde un Memento
   restore(memento: DrawingMemento): void {
     this.shapes = memento.getShapes();
-    console.log('%c\nEstado de la pizarra restaurado.', COLORS.blue);
+    console.log("%c\nEstado de la pizarra restaurado.", COLORS.blue);
   }
 }
 
@@ -62,13 +62,13 @@ class History {
   // Guardar un Memento
   // TODO: Implementar push para guardar en la historia
   push(memento: DrawingMemento): void {
-    throw new Error('Method not implemented.');
+    this.mementos.push(memento);
   }
 
   // Recuperar el último Memento
   // TODO: Implementar pop para recuperar el último memento
   pop(): DrawingMemento | undefined {
-    throw new Error('Method not implemented.');
+    return this.mementos.pop();
   }
 }
 
@@ -79,13 +79,13 @@ function main(): void {
   const history = new History();
 
   // El usuario agrega figuras y guarda el estado en cada paso
-  drawingBoard.addShape('Círculo');
+  drawingBoard.addShape("Círculo");
   history.push(drawingBoard.save());
 
-  drawingBoard.addShape('Cuadrado');
+  drawingBoard.addShape("Cuadrado");
   history.push(drawingBoard.save());
 
-  drawingBoard.addShape('Triángulo');
+  drawingBoard.addShape("Triángulo");
   drawingBoard.showBoard(); // Mostrar estado actual de la pizarra
 
   // Deshacer el último cambio

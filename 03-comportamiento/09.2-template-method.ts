@@ -38,7 +38,7 @@
     5.	Salir de la habitación: Cerrar la puerta y marcar como terminada
  */
 
-import { COLORS } from '../helpers/colors.ts';
+import { COLORS } from "../helpers/colors.ts";
 
 // Clase Base - RoomCleaning
 abstract class RoomCleaning {
@@ -50,60 +50,70 @@ abstract class RoomCleaning {
     this.disinfectSurfaces();
     this.exitRoom();
 
-    console.log('Limpieza terminada.\n');
+    console.log("Limpieza terminada.\n");
   }
 
   // Pasos comunes
   private enterRoom(): void {
-    console.log('Entrando a la habitación...');
+    console.log("Entrando a la habitación...");
   }
 
   private collectTrash(): void {
-    console.log('Recogiendo la basura...');
+    console.log("Recogiendo la basura...");
   }
 
   private disinfectSurfaces(): void {
-    console.log('Desinfectando superficies...');
+    console.log("Desinfectando superficies...");
   }
 
   private exitRoom(): void {
-    console.log('Saliendo de la habitación y marcándola como limpia.');
+    console.log("Saliendo de la habitación y marcándola como limpia.");
   }
 
   // Método abstracto para limpieza específica
   // TODO: Implementar el método specificCleaning en las subclases
   // protected abstract? ambas?
+  protected abstract specificCleaning(): void;
 }
 
 // Subclase - HotelRoomCleaning
 class HotelRoomCleaning extends RoomCleaning {
+  protected override specificCleaning(): void {
+    console.log("Haciendo las camas y reponiendo artículos de baño.");
+  }
   // TODO: Implementar método específico
   // Mensaje: 'Haciendo las camas y reponiendo artículos de baño.'
 }
 
 // Subclase - ConferenceRoomCleaning
 class ConferenceRoomCleaning extends RoomCleaning {
+  protected override specificCleaning(): void {
+    console.log("Limpiando mesas y organizando sillas.");
+  }
   // TODO: Implementar método específico
   // Mensaje: 'Limpiando mesas y organizando sillas.'
 }
 
 // Subclase - OfficeCleaning
 class OfficeCleaning extends RoomCleaning {
+  protected override specificCleaning(): void {
+    console.log("Limpiando escritorios y organizando documentos.");
+  }
   // TODO: Implementar método específico
   // Mensaje: 'Limpiando escritorios y organizando documentos.'
 }
 
 // Código Cliente
 function main(): void {
-  console.log('%cLimpieza de una habitación de hotel:', COLORS.blue);
+  console.log("%cLimpieza de una habitación de hotel:", COLORS.blue);
   const hotelRoom = new HotelRoomCleaning();
   hotelRoom.cleanRoom();
 
-  console.log('%cLimpieza de una sala de conferencias:', COLORS.purple);
+  console.log("%cLimpieza de una sala de conferencias:", COLORS.purple);
   const conferenceRoom = new ConferenceRoomCleaning();
   conferenceRoom.cleanRoom();
 
-  console.log('%cLimpieza de una oficina:', COLORS.orange);
+  console.log("%cLimpieza de una oficina:", COLORS.orange);
   const office = new OfficeCleaning();
   office.cleanRoom();
 }
